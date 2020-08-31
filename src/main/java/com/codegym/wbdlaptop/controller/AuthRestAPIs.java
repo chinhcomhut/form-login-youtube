@@ -70,12 +70,12 @@ public class AuthRestAPIs {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
         if (userService.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<>(new ResponseMessage("nouser"),
-                    HttpStatus.OK);
+                    HttpStatus.BAD_REQUEST);
         }
 
         if (userService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<>(new ResponseMessage("noemail"),
-                    HttpStatus.OK);
+                    HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
