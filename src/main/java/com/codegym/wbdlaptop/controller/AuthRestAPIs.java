@@ -70,12 +70,12 @@ public class AuthRestAPIs {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
         if (userService.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<>(new ResponseMessage("nouser"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.OK);
         }
 
         if (userService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<>(new ResponseMessage("noemail"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.OK);
         }
 
         // Creating user's account
@@ -109,7 +109,7 @@ public class AuthRestAPIs {
         user.setRoles(roles);
         userService.save(user);
 
-        return new ResponseEntity<>(new ResponseMessage("yes"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ResponseMessage("yes"), HttpStatus.OK);
     }
     @PutMapping("/change-password")
     public ResponseEntity<?> changePassword(HttpServletRequest request, @Valid @RequestBody ChangePasswordForm changePasswordForm) {
